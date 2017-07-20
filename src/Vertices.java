@@ -2,7 +2,8 @@
 
 class Vertices{
     
-    private int x,y,capacidade,demanda;
+    private int x,y,capacidade,demanda,capacidadeUtilizada;
+
     
     public float distancia(Vertices proximo){
         float disX = proximo.getX() - this.getX();
@@ -17,10 +18,20 @@ class Vertices{
         return disX;
     }
     
-    private int getY() {
+    
+    public int getCapacidadeUtilizada(){
+        return this.capacidadeUtilizada;
+    }
+    
+    public void setCapacidadeUtilizada(int cap){
+        this.capacidadeUtilizada = this.capacidadeUtilizada + cap;
+    }
+    
+    public int getY() {
 		// TODO Auto-generated method stub
-		return 0;
+		return this.y;
 	}
+	
 
 	public void setX(int x){
         this.x = x;

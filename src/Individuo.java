@@ -25,9 +25,7 @@ class Individuo{
      }
      
      public void calculaDistTotal(Mapa mapa){
-         for(Vertices v:mapa.vertices){
-              
-         }
+          
      }
      
 

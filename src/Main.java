@@ -31,9 +31,9 @@ class Main{
     		Vertices vertices = new Vertices();
     		linhaSeparado = corrigeLeitura(linhaSeparado);
     		int aux =Integer.parseInt(linhaSeparado[0].trim());
-    		mapa.tamanho = aux;
+    		mapa.setTamanho(aux);
     		aux =Integer.parseInt(linhaSeparado[1].trim());
-    		mapa.medianas = aux;
+    		mapa.setMedianas(aux);
     		
     		while (sc.hasNextLine()){
     			linha = sc.nextLine();

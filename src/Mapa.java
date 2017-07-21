@@ -13,4 +13,21 @@ class Mapa{
     public int getTamanho(){
         return this.tamanho;
     }
+
+	public List<Vertices> getVertices() {
+		return vertices;
+	}
+
+	public void setVertices(List<Vertices> vertices) {
+		this.vertices = vertices;
+	}
+
+	public void setTamanho(int tamanho) {
+		this.tamanho = tamanho;
+	}
+
+	public void setMedianas(int medianas) {
+		this.medianas = medianas;
+	}
+    
 }

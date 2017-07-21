@@ -8,14 +8,14 @@ class Main{
     
     static Mapa mapa;
     
-    public static String[] corrigeLeitura(String[] str){
-		String[] aux={"","","",""};
+    public static Integer[] tratarLeitura(String[] str){
+		Integer[] aux={0,0,0,0};
 		int i,cont;
 		cont =0;
 		int tam = str.length;
 		for (i=0; i<tam; i++){
 		    if (!String.valueOf(str[i]).isEmpty()){
-		    	aux[cont]=str[i];
+		    	aux[cont]=Integer.parseInt(str[i]);
 		    	cont+=1;
 		    }
 		}
@@ -24,30 +24,22 @@ class Main{
     
     public static Mapa lerAqruivo(String arquivo){
     	try{
-            Scanner sc = new Scanner(new File(arquivo));
-    		String linha = sc.nextLine();
-    		String[] linhaSeparado = linha.split(" ");
+    		Integer[] linhaSeparado;
     		Mapa mapa = new Mapa();
     		Vertices vertices = new Vertices();
-    		linhaSeparado = corrigeLeitura(linhaSeparado);
-    		int aux =Integer.parseInt(linhaSeparado[0].trim());
-    		mapa.setTamanho(aux);
-    		aux =Integer.parseInt(linhaSeparado[1].trim());
-    		mapa.setMedianas(aux);
+    		Scanner sc = new Scanner(new File(arquivo));
+    		String linha = sc.nextLine();
+    		linhaSeparado = tratarLeitura(linha.split(" "));
+    		mapa.setTamanho(linhaSeparado[0]);
+    		mapa.setMedianas(linhaSeparado[1]);
     		
     		while (sc.hasNextLine()){
     			linha = sc.nextLine();
-        		linhaSeparado = linha.split("  ");
-        		linhaSeparado = corrigeLeitura(linhaSeparado);
-        		
-        		aux =Integer.parseInt(linhaSeparado[0].trim());
-        		vertices.setX(aux);
-        		aux =Integer.parseInt(linhaSeparado[1].trim());
-        		vertices.setY(aux);
-        		aux =Integer.parseInt(linhaSeparado[2].trim());
-        		vertices.setCapacidade(aux);
-        		aux =Integer.parseInt(linhaSeparado[3].trim());
-        		vertices.setDemanda(aux);
+        		linhaSeparado = tratarLeitura(linha.split("  "));
+        		vertices.setX(linhaSeparado[0]);
+        		vertices.setY(linhaSeparado[1]);
+        		vertices.setCapacidade(linhaSeparado[2]);
+        		vertices.setDemanda(linhaSeparado[3]);
         		mapa.vertices.add(vertices);
         	}
 

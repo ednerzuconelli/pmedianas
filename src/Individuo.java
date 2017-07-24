@@ -14,9 +14,9 @@ class Individuo{
          Random rand = new Random();
          
          while(i<mapa.getMedianas()){
-               j = rand.nextInt(mapa.getTamanho());
+               j = rand.nextInt(mapa.getTamanho()-1);
                
-               if(!medianas.contains(mapa.vertices.get(j))){
+               if(!medianas.equals(mapa.vertices.get(j))){
                     medianas.add(mapa.vertices.get(j));
                     //calcular capacidade total.
                     i++;
@@ -26,6 +26,21 @@ class Individuo{
      
      public void calculaDistTotal(Mapa mapa){
           
+    	 for (Vertices vertice :mapa.getVertices()){
+    		 float menorDistancia=10000000;
+    		 Vertices v = null;
+    		 for (Vertices mediana : medianas){
+        		  if (menorDistancia > vertice.distancia(mediana)){
+        		     menorDistancia = vertice.distancia(mediana);
+        		     v =mediana;
+        		  }   
+        	  }
+    		 v.setCapacidadeUtilizada(vertice.getDemanda());
+    		 distancia += menorDistancia;
+          }
+    	 for (Vertices mediana : medianas){
+    		 System.out.println(mediana.getCapacidadeUtilizada());
+    	 }
      }
      
 

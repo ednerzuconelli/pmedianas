@@ -23,35 +23,39 @@ class Main{
     }
     
     public static Mapa lerAqruivo(String arquivo){
+    	Mapa mapas = new Mapa();
     	try{
     		Integer[] linhaSeparado;
-    		Mapa mapa = new Mapa();
-    		Vertices vertices = new Vertices();
+    		
+    		
     		Scanner sc = new Scanner(new File(arquivo));
     		String linha = sc.nextLine();
     		linhaSeparado = tratarLeitura(linha.split(" "));
-    		mapa.setTamanho(linhaSeparado[0]);
-    		mapa.setMedianas(linhaSeparado[1]);
-    		
+    		mapas.setTamanho(linhaSeparado[0]);
+    		mapas.setMedianas(linhaSeparado[1]);
+    	
     		while (sc.hasNextLine()){
     			linha = sc.nextLine();
         		linhaSeparado = tratarLeitura(linha.split("  "));
+        		Vertices vertices = new Vertices();
         		vertices.setX(linhaSeparado[0]);
         		vertices.setY(linhaSeparado[1]);
         		vertices.setCapacidade(linhaSeparado[2]);
         		vertices.setDemanda(linhaSeparado[3]);
-        		mapa.vertices.add(vertices);
+        		mapas.vertices.add(vertices);
         	}
 
          }catch(IOException ioe){
             ioe.printStackTrace();
          }
-        return mapa;
+        return mapas;
     }
     
     public static void main(String[] args){
        mapa = lerAqruivo("E:/git/pmedianas/src/arquivos/SJC1.dat");
-       
+       Individuo individuo = new Individuo();
+       individuo.solucaoAleatoria(mapa);
+       individuo.calculaDistTotal(mapa);
     }
     
     

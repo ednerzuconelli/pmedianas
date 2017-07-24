@@ -15,7 +15,7 @@ class Main{
 		int tam = str.length;
 		for (i=0; i<tam; i++){
 		    if (!String.valueOf(str[i]).isEmpty()){
-		    	aux[cont]=Integer.parseInt(str[i]);
+		    	aux[cont]=Integer.parseInt(str[i].trim());
 		    	cont+=1;
 		    }
 		}
@@ -50,7 +50,7 @@ class Main{
     }
     
     public static void main(String[] args){
-       mapa = lerAqruivo("E:/git/pmedianas/src/arquivos/Med 12");
+       mapa = lerAqruivo("E:/git/pmedianas/src/arquivos/SJC1.dat");
        
     }
     

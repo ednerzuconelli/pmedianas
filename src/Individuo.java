@@ -25,7 +25,7 @@ class Individuo{
      }
      
      public void calculaDistTotal(Mapa mapa){
-          
+         
     	 for (Vertices vertice :mapa.getVertices()){
     		 float menorDistancia=10000000;
     		 Vertices v = null;
@@ -35,12 +35,15 @@ class Individuo{
         		     v =mediana;
         		  }   
         	  }
-    		 v.setCapacidadeUtilizada(vertice.getDemanda());
-    		 distancia += menorDistancia;
+    		 
+    		    v.setCapacidadeUtilizada(vertice.getDemanda());
+    		    distancia += menorDistancia;
+    		    
           }
     	 for (Vertices mediana : medianas){
     		 System.out.println(mediana.getCapacidadeUtilizada());
-    	 }
+    		 
+    	 }System.out.println(distancia);
      }
      
 

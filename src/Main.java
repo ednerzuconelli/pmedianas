@@ -1,5 +1,7 @@
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 class Main{
@@ -26,8 +28,6 @@ class Main{
     	Mapa mapas = new Mapa();
     	try{
     		Integer[] linhaSeparado;
-    		
-    		
     		Scanner sc = new Scanner(new File(arquivo));
     		String linha = sc.nextLine();
     		linhaSeparado = tratarLeitura(linha.split(" "));
@@ -52,10 +52,17 @@ class Main{
     }
     
     public static void main(String[] args){
-       mapa = lerAqruivo("E:/git/pmedianas/src/arquivos/SJC1.dat");
-       Individuo individuo = new Individuo();
-       individuo.solucaoAleatoria(mapa);
-       individuo.calculaDistTotal(mapa);
+       mapa = lerAqruivo("E:/git/pmedianas/src/arquivos/Med 12");
+       int i;
+       List<Individuo> populacaoInicial = new ArrayList<>();
+       for (i=0;i<10;i++){
+          Individuo individuo = new Individuo();
+          individuo.solucaoAleatoria(mapa);
+          individuo.calculaDistTotal(mapa);
+          populacaoInicial.add(individuo);
+          
+       }
+       
     }
     
     

@@ -52,16 +52,9 @@ class Main{
     }
     
     public static void main(String[] args){
-       mapa = lerAqruivo("E:/git/pmedianas/src/arquivos/Med 12");
-       int i;
-       List<Individuo> populacaoInicial = new ArrayList<>();
-       for (i=0;i<10;i++){
-          Individuo individuo = new Individuo();
-          individuo.solucaoAleatoria(mapa);
-          individuo.calculaDistTotal(mapa);
-          populacaoInicial.add(individuo);
-          
-       }
+       mapa = lerAqruivo("src/arquivos/Med 12");
+       Genetico genetico = new Genetico();
+       genetico.geraPopulacaoInicial(mapa);
        
     }
     

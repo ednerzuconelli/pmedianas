@@ -40,11 +40,13 @@ class Individuo{
     		    distancia += menorDistancia;
     		    
           }
-    	 for (Vertices mediana : medianas){
-    		 System.out.println(mediana.getCapacidadeUtilizada());
-    		 
-    	 }System.out.println(distancia);
+    	 
      }
+
+	public float getDistanciaTotal() {
+		// TODO Auto-generated method stub
+		return distancia;
+	}
      
 
 }

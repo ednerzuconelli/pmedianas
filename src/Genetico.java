@@ -39,16 +39,16 @@ public class Genetico {
 	};
 	
 	public List<Individuo> selecao(){
-		return populacaoInicial.subList(0, 1);
+		return populacaoInicial.subList(0, 2);
 		
 	}
 		
-	public void cruzamento(){
+	public void cruzamento(Mapa mapa){
 		List<Individuo> pais = selecao();
 		Individuo filho = new Individuo();
 		
 		for(Vertices v: pais.get(0).medianas){
-			if(pais.get(1).medianas.contains(v)){
+			if(pais.get(0).medianas.contains(v)){
 				filho.medianas.add(v);
 			}
 		}
@@ -64,6 +64,13 @@ public class Genetico {
 				j+=1;
 			}else j+=1;
 		}
-		
+		filho.calculaDistTotal(mapa);
+		populacaoInicial.remove(populacaoInicial.size()-1);
+		populacaoInicial.add(filho);
+		Collections.sort(populacaoInicial,idComparator);
+		for (i=0; i<10; i++){
+			System.out.println(populacaoInicial.get(i).getDistanciaTotal());
+		}
+		System.out.println("");
 	}
 }

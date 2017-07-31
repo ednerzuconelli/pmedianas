@@ -55,7 +55,10 @@ class Main{
        mapa = lerAqruivo("src/arquivos/Med 12");
        Genetico genetico = new Genetico();
        genetico.geraPopulacaoInicial(mapa);
-       
+       int i;
+       for (i=0;i<10; i++){
+           genetico.cruzamento(mapa);
+       }  
     }
     
     

@@ -16,7 +16,7 @@ public class Genetico {
 	   int i;
 	   tamanhoMediana =mapa.getMedianas();
 	   populacaoInicial = new ArrayList<>();	
-       for (i=0;i<10;i++){
+       for (i=0;i<100;i++){
            Individuo individuo = new Individuo();
            individuo.solucaoAleatoria(mapa);
            individuo.calculaDistTotal(mapa);
@@ -31,8 +31,8 @@ public class Genetico {
 		@Override
 		public int compare(Individuo o1, Individuo o2) {
 			// TODO Auto-generated method stub
-			return  o1.getDistanciaTotal() < o2.getDistanciaTotal()?-1:
-				o1.getDistanciaTotal() > o2.getDistanciaTotal()?1:
+			return  o1.getPontos()<o2.getPontos()?-1:
+				o1.getPontos()>o2.getPontos()?1:
 					0;
 		}
 
@@ -45,6 +45,7 @@ public class Genetico {
 		
 	public void cruzamento(Mapa mapa){
 		List<Individuo> pais = selecao();
+		
 		Individuo filho = new Individuo();
 		
 		for(Vertices v: pais.get(0).medianas){

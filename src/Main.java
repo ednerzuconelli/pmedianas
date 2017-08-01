@@ -52,11 +52,11 @@ class Main{
     }
     
     public static void main(String[] args){
-       mapa = lerAqruivo("src/arquivos/Med 12");
+       mapa = lerAqruivo("../src/arquivos/Med 12");
        Genetico genetico = new Genetico();
        genetico.geraPopulacaoInicial(mapa);
        int i;
-       for (i=0;i<10; i++){
+       while (genetico.populacaoInicial.get(0).getPontos()!=genetico.populacaoInicial.get(0).getDistanciaTotal()){
            genetico.cruzamento(mapa);
        }  
     }

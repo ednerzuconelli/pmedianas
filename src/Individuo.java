@@ -62,5 +62,11 @@ class Individuo{
         // TODO Auto-generated method stub
         return pontos;
     }
+     
+ 	public void limparCapacidade() {
+		for(Vertices v: medianas) {
+			v.limparCapacidadeUtilizada();
+		}
+	} 
 
 }

@@ -29,5 +29,13 @@ class Mapa{
 	public void setMedianas(int medianas) {
 		this.medianas = medianas;
 	}
+	
+	public void listarMapa() {
+		for(Vertices v: vertices) {
+			System.out.println(v.getX()+" "+v.getY()+" "+v.getCapacidade()+v.getCapacidadeUtilizada());
+		}
+	}
+	
+
     
 }

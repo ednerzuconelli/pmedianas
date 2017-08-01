@@ -1,9 +1,11 @@
+
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 import java.util.Scanner;
+
 
 class Main{
     //min distancia entre o somatorio dos pontos à mediana
@@ -54,16 +56,32 @@ class Main{
     
     public static void main(String[] args){
        mapa = lerAqruivo("src/arquivos/Med 12");
+       //mapa.listarMapa();
        Genetico genetico = new Genetico();
        genetico.geraPopulacaoInicial(mapa);
-       genetico.setTaxaMutacao(10);
-      // Random gerador = new Random();
-       
+       genetico.setTaxaMutacao(30);
+       Random gerador = new Random();
+       int i=0;
+       float dist=0.0f;
        while (genetico.populacaoInicial.get(0).getPontos()!=genetico.populacaoInicial.get(0).getDistanciaTotal()){
            genetico.cruzamento(mapa);
-          /* if (genetico.getTaxaMutacao()>gerador.nextInt(100)){
-        	   genetico.mutacao(mapa,null);
-           }*/
+           
+        
+           if(dist==0.0f) {
+        	   dist = genetico.populacaoInicial.get(0).getPontos();
+           }else {
+        	   if(dist==genetico.populacaoInicial.get(0).getPontos()) {
+        		   i++;
+        	   }else {
+        		   dist = genetico.populacaoInicial.get(0).getPontos();
+        		   i =0;
+        	   }
+        	   
+        	   if(i==10) {
+        		   genetico.mutacao(mapa, genetico.populacaoInicial.get(0));
+        		   i=0;
+        	   }
+           }
        }  
     }
     

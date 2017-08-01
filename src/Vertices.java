@@ -23,6 +23,10 @@ class Vertices{
         return this.capacidadeUtilizada;
     }
     
+    public void limparCapacidadeUtilizada(){
+        this.capacidadeUtilizada = 0;
+    }
+    
     public void setCapacidadeUtilizada(int cap){
         this.capacidadeUtilizada = this.capacidadeUtilizada + cap;
     }

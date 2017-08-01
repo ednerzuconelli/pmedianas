@@ -53,7 +53,8 @@ class Main{
     }
     
     public static void main(String[] args){
-       mapa = lerAqruivo("../src/arquivos/Med 12");
+       mapa = lerAqruivo("src/arquivos/Med 12");
+       //mapa.listarMapa();
        Genetico genetico = new Genetico();
        genetico.geraPopulacaoInicial(mapa);
        genetico.setTaxaMutacao(10);
@@ -61,9 +62,6 @@ class Main{
        int i;
        while (genetico.populacaoInicial.get(0).getPontos()!=genetico.populacaoInicial.get(0).getDistanciaTotal()){
            genetico.cruzamento(mapa);
-           if (genetico.getTaxaMutacao()>gerador.nextInt(100)){
-        	   genetico.mutacao(mapa,null);
-           }
        }  
     }
     

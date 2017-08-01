@@ -49,7 +49,15 @@ public class Genetico {
 	};
 	
 	public List<Individuo> selecao(){
-		return populacaoInicial.subList(0, 2);
+		List<Individuo> pop = populacaoInicial.subList(0, 1);
+		Random rand = new Random();
+		int x = rand.nextInt(populacaoInicial.size());
+		while(pop.contains(populacaoInicial.get(x))) {
+			x = rand.nextInt(populacaoInicial.size());
+		}
+		
+		pop.add(populacaoInicial.get(x));
+		return pop;
 		
 	}
 		
@@ -63,6 +71,7 @@ public class Genetico {
 				filho.medianas.add(v);
 			}
 		}
+		
 		int i = 0;
 		int j=0;
 		while(filho.medianas.size()<tamanhoMediana){
@@ -76,17 +85,23 @@ public class Genetico {
 			}else j+=1;
 		}
 		
-		if (getTaxaMutacao()< mutar.nextInt(100) ){
+		while(filho.medianas.size() > tamanhoMediana) {
+			filho.medianas.remove(tamanhoMediana-1);
+		}
+		
+		if (getTaxaMutacao()> mutar.nextInt(100) ){
 		     filho = mutacao(mapa, filho);
 		     
 		}     
+		filho.limparCapacidade();
 		filho.calculaDistTotal(mapa);
-		populacaoInicial.remove(populacaoInicial.size()-1);
+		Random motalidade = new Random();
+		populacaoInicial.remove(motalidade.nextInt(populacaoInicial.size()-1));
 		populacaoInicial.add(filho);
 		Collections.sort(populacaoInicial,idComparator);
-		for (i=0; i<10; i++){
-			System.out.println(populacaoInicial.get(i).getDistanciaTotal());
-		}
+		//for (i=0; i<100; i++){
+			System.out.println(populacaoInicial.get(0).getDistanciaTotal());
+		//}
 		System.out.println("");
 	}
 	public Individuo mutacao(Mapa mapa, Individuo individuo){
@@ -94,7 +109,7 @@ public class Genetico {
 		Random rand = new Random();
         int j  = rand.nextInt(mapa.getTamanho()-1);
               
-        while (individuo.medianas.equals(mapa.vertices.get(j))){
+        while (individuo.medianas.contains(mapa.vertices.get(j))){
               j  = rand.nextInt(mapa.getTamanho()-1);     
         }
         individuo.medianas.add(mapa.vertices.get(j));

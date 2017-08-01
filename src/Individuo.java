@@ -5,12 +5,14 @@ import java.util.Random;
 class Individuo{
  
      private float distancia;   
-     private float penalidade;
+     private float pontos =0;
+
      List<Vertices> medianas = new ArrayList<Vertices>();
      
      public void solucaoAleatoria(Mapa mapa){
          int i = 0;
          int j;
+
          Random rand = new Random();
          
          while(i<mapa.getMedianas()){
@@ -39,6 +41,14 @@ class Individuo{
     		    v.setCapacidadeUtilizada(vertice.getDemanda());
     		    distancia += menorDistancia;
     		    
+          } 
+
+          pontos += distancia;
+
+          for (Vertices mediana : medianas){
+                  if (mediana.getCapacidadeUtilizada() > mediana.getCapacidade()){
+                     pontos += 100;
+                  }   
           }
     	 
      }
@@ -48,5 +58,9 @@ class Individuo{
 		return distancia;
 	}
      
+     public float getPontos()    {
+        // TODO Auto-generated method stub
+        return pontos;
+    }
 
 }

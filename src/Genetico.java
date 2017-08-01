@@ -7,11 +7,21 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.PriorityQueue;
 import java.util.Queue;
+import java.util.Random;
 
 public class Genetico {
 	List<Individuo> populacaoInicial;
 	int tamanhoMediana;
-	
+	int taxaMutacao;
+		
+	public int getTaxaMutacao() {
+		return taxaMutacao;
+	}
+
+	public void setTaxaMutacao(int taxaMutacao) {
+		this.taxaMutacao = taxaMutacao;
+	}
+
 	public void geraPopulacaoInicial(Mapa mapa){
 	   int i;
 	   tamanhoMediana =mapa.getMedianas();
@@ -46,9 +56,9 @@ public class Genetico {
 	public void cruzamento(Mapa mapa){
 		List<Individuo> pais = selecao();
 		Individuo filho = new Individuo();
-		
+		Random mutar = new Random();
 		for(Vertices v: pais.get(0).medianas){
-			if(pais.get(0).medianas.contains(v)){
+			if(pais.get(1).medianas.contains(v)){
 				filho.medianas.add(v);
 			}
 		}
@@ -64,6 +74,11 @@ public class Genetico {
 				j+=1;
 			}else j+=1;
 		}
+		
+		if (getTaxaMutacao()< mutar.nextInt(100) ){
+		     filho = mutacao(mapa, filho);
+		     
+		}     
 		filho.calculaDistTotal(mapa);
 		populacaoInicial.remove(populacaoInicial.size()-1);
 		populacaoInicial.add(filho);
@@ -72,5 +87,17 @@ public class Genetico {
 			System.out.println(populacaoInicial.get(i).getDistanciaTotal());
 		}
 		System.out.println("");
+	}
+	public Individuo mutacao(Mapa mapa, Individuo individuo){
+		individuo.medianas.remove(0);
+		Random rand = new Random();
+        int j  = rand.nextInt(mapa.getTamanho()-1);
+              
+        while (individuo.medianas.equals(mapa.vertices.get(j))){
+              j  = rand.nextInt(mapa.getTamanho()-1);     
+        }
+        individuo.medianas.add(mapa.vertices.get(j));
+		return individuo;
+        
 	}
 }

@@ -2,6 +2,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 import java.util.Scanner;
 
 class Main{
@@ -55,9 +56,14 @@ class Main{
        mapa = lerAqruivo("src/arquivos/Med 12");
        Genetico genetico = new Genetico();
        genetico.geraPopulacaoInicial(mapa);
+       genetico.setTaxaMutacao(10);
+       Random gerador = new Random();
        int i;
-       for (i=0;i<10; i++){
+   	   for (i=0;i<10; i++){
            genetico.cruzamento(mapa);
+           if (genetico.getTaxaMutacao()>gerador.nextInt(100)){
+        	   genetico.mutacao(mapa,null);
+           }
        }  
     }
     

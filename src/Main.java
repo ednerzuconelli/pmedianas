@@ -57,11 +57,29 @@ class Main{
        //mapa.listarMapa();
        Genetico genetico = new Genetico();
        genetico.geraPopulacaoInicial(mapa);
-       genetico.setTaxaMutacao(10);
+       genetico.setTaxaMutacao(30);
        Random gerador = new Random();
-       int i;
+       int i=0;
+       float dist=0.0f;
        while (genetico.populacaoInicial.get(0).getPontos()!=genetico.populacaoInicial.get(0).getDistanciaTotal()){
            genetico.cruzamento(mapa);
+           
+        
+           if(dist==0.0f) {
+        	   dist = genetico.populacaoInicial.get(0).getPontos();
+           }else {
+        	   if(dist==genetico.populacaoInicial.get(0).getPontos()) {
+        		   i++;
+        	   }else {
+        		   dist = genetico.populacaoInicial.get(0).getPontos();
+        		   i =0;
+        	   }
+        	   
+        	   if(i==10) {
+        		   genetico.mutacao(mapa, genetico.populacaoInicial.get(0));
+        		   i=0;
+        	   }
+           }
        }  
     }
     

@@ -50,6 +50,7 @@ public class Genetico {
 	
 	public List<Individuo> selecao(){
 		List<Individuo> pop = populacaoInicial.subList(0, 1);
+		
 		Random rand = new Random();
 		int x = rand.nextInt(populacaoInicial.size());
 		while(pop.contains(populacaoInicial.get(x))) {
@@ -57,6 +58,7 @@ public class Genetico {
 		}
 		
 		pop.add(populacaoInicial.get(x));
+		
 		return pop;
 		
 	}
@@ -66,11 +68,11 @@ public class Genetico {
 		
 		Individuo filho = new Individuo();
 		Random mutar = new Random();
-		for(Vertices v: pais.get(0).medianas){
+		/*for(Vertices v: pais.get(0).medianas){
 			if(pais.get(1).medianas.contains(v)){
 				filho.medianas.add(v);
 			}
-		}
+		}*/
 		
 		int i = 0;
 		int j=0;
@@ -100,7 +102,7 @@ public class Genetico {
 		populacaoInicial.add(filho);
 		Collections.sort(populacaoInicial,idComparator);
 		//for (i=0; i<100; i++){
-			System.out.println(populacaoInicial.get(0).getDistanciaTotal());
+			System.out.println("distância Mínima = "+populacaoInicial.get(0).getDistanciaTotal()+" Pontos = "+populacaoInicial.get(0).getPontos());
 		//}
 		System.out.println("");
 	}

@@ -3,10 +3,7 @@
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.LinkedList;
 import java.util.List;
-import java.util.PriorityQueue;
-import java.util.Queue;
 import java.util.Random;
 
 public class Genetico {
@@ -101,10 +98,10 @@ public class Genetico {
 		populacaoInicial.remove(motalidade.nextInt(populacaoInicial.size()-1));
 		populacaoInicial.add(filho);
 		Collections.sort(populacaoInicial,idComparator);
-		//for (i=0; i<100; i++){
-			System.out.println("distância Mínima = "+populacaoInicial.get(0).getDistanciaTotal()+" Pontos = "+populacaoInicial.get(0).getPontos());
-		//}
-		System.out.println("");
+		
+//		System.out.println("distância Mínima = "+populacaoInicial.get(0).getDistanciaTotal()+" Pontos = "+populacaoInicial.get(0).getPontos());
+		
+	//	System.out.println("");
 	}
 	public Individuo mutacao(Mapa mapa, Individuo individuo){
 		individuo.medianas.remove(0);

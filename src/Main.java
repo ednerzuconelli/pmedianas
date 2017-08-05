@@ -1,15 +1,13 @@
 
+import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
+import java.io.PrintWriter;
 import java.util.Scanner;
 
 
 class Main{
-    //min distancia entre o somatorio dos pontos Ã  mediana
-    //somatorio do peso < capacidadde da Mediana
     
     static Mapa mapa;
     
@@ -20,7 +18,7 @@ class Main{
 		int tam = str.length;
 		for (i=0; i<tam; i++){
 		    if (!String.valueOf(str[i]).isEmpty()){
-		    	aux[cont]=Integer.parseInt(str[i].trim());
+		    	aux[cont]=(int)Math.floor(Float.parseFloat(str[i].trim()));
 		    	cont+=1;
 		    }
 		}
@@ -47,7 +45,7 @@ class Main{
         		vertices.setDemanda(linhaSeparado[3]);
         		mapas.vertices.add(vertices);
         	}
-
+            sc.close();
          }catch(IOException ioe){
             ioe.printStackTrace();
          }
@@ -55,35 +53,54 @@ class Main{
     }
     
     public static void main(String[] args){
-       mapa = lerAqruivo("src/arquivos/Med 12");
-       //mapa.listarMapa();
-       Genetico genetico = new Genetico();
-       genetico.geraPopulacaoInicial(mapa);
-       genetico.setTaxaMutacao(30);
-       Random gerador = new Random();
-       int i=0;
-       float dist=0.0f;
-       while (genetico.populacaoInicial.get(0).getPontos()!=genetico.populacaoInicial.get(0).getDistanciaTotal()){
-           genetico.cruzamento(mapa);
-           
-        
-           if(dist==0.0f) {
-        	   dist = genetico.populacaoInicial.get(0).getPontos();
-           }else {
-        	   if(dist==genetico.populacaoInicial.get(0).getPontos()) {
-        		   i++;
-        	   }else {
-        		   dist = genetico.populacaoInicial.get(0).getPontos();
-        		   i =0;
-        	   }
-        	   
-        	   if(i==10) {
-        		   genetico.mutacao(mapa, genetico.populacaoInicial.get(0));
-        		   i=0;
-        	   }
-           }
-       }  
+    	try{
+	    	PrintWriter out = new PrintWriter(new FileWriter("src/arquivos/saida.out"));
+	    	BufferedWriter bw = new BufferedWriter(out);
+	    	File arquivos[];
+	    	String arquivo;
+	    	File diretorio = new File("src/arquivos");
+	    	arquivos = diretorio.listFiles();
+	    	for(int j = 0; j < arquivos.length; j++){
+	    	   arquivo = arquivos[j].getPath();
+	    	   mapa = lerAqruivo(arquivo);
+	    	   bw.write(arquivo);
+	    	   bw.newLine();
+	    	   Genetico genetico = new Genetico();
+		       genetico.geraPopulacaoInicial(mapa);
+		       genetico.setTaxaMutacao(30);
+		       int i=0;
+		       float dist=0.0f;
+		       while (genetico.populacaoInicial.get(0).getPontos()!=genetico.populacaoInicial.get(0).getDistanciaTotal()){
+		   		 System.out.println("distância Mínima = "+genetico.populacaoInicial.get(0).getDistanciaTotal()+" Pontos = "+genetico.populacaoInicial.get(0).getPontos());
+		   		 bw.write("distância Mínima = "+genetico.populacaoInicial.get(0).getDistanciaTotal()+" Pontos = "+genetico.populacaoInicial.get(0).getPontos());
+		    	 bw.newLine();
+				 System.out.println("");
+	
+		    	   genetico.cruzamento(mapa);
+		           
+		        
+		           if(dist==0.0f) {
+		        	   dist = genetico.populacaoInicial.get(0).getPontos();
+		           }else {
+		        	   if(dist==genetico.populacaoInicial.get(0).getPontos()) {
+		        		   i++;
+		        	   }else {
+		        		   dist = genetico.populacaoInicial.get(0).getPontos();
+		        		   i =0;
+		        	   }
+		        	   
+		        	   if(i==10) {
+		        		   genetico.mutacao(mapa, genetico.populacaoInicial.get(0));
+		        		   i=0;
+		        	   }
+		           }
+		       }  
+		    }
+	    	bw.flush();
+	    	bw.close();
+    	}catch(IOException ex){
+    		  ex.printStackTrace();
+    	}	
     }
-    
     
 }

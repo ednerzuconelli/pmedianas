@@ -54,14 +54,14 @@ class Main{
     
     public static void main(String[] args){
     	try{
-	    	PrintWriter out = new PrintWriter(new FileWriter("src/arquivos/saida.out"));
+	    	PrintWriter out = new PrintWriter(new FileWriter("src/saida.out"));
 	    	BufferedWriter bw = new BufferedWriter(out);
 	    	File arquivos[];
-	    	String arquivo;
+	    	String arquivo = "src/arquivos/SJC1.dat";
 	    	File diretorio = new File("src/arquivos");
 	    	arquivos = diretorio.listFiles();
-	    	for(int j = 0; j < arquivos.length; j++){
-	    	   arquivo = arquivos[j].getPath();
+	    	//for(int j = 0; j < arquivos.length; j++){
+	    	  // arquivo = arquivos[j].getPath();
 	    	   mapa = lerAqruivo(arquivo);
 	    	   bw.write(arquivo);
 	    	   bw.newLine();
@@ -72,8 +72,8 @@ class Main{
 		       float dist=0.0f;
 		       while (genetico.populacaoInicial.get(0).getPontos()!=genetico.populacaoInicial.get(0).getDistanciaTotal()){
 		   		 System.out.println("distância Mínima = "+genetico.populacaoInicial.get(0).getDistanciaTotal()+" Pontos = "+genetico.populacaoInicial.get(0).getPontos());
-		   		 bw.write("distância Mínima = "+genetico.populacaoInicial.get(0).getDistanciaTotal()+" Pontos = "+genetico.populacaoInicial.get(0).getPontos());
-		    	 bw.newLine();
+		   		 //bw.write("distância Mínima = "+genetico.populacaoInicial.get(0).getDistanciaTotal()+" Pontos = "+genetico.populacaoInicial.get(0).getPontos());
+		    	 //bw.newLine();
 				 System.out.println("");
 	
 		    	   genetico.cruzamento(mapa);
@@ -90,12 +90,13 @@ class Main{
 		        	   }
 		        	   
 		        	   if(i==10) {
-		        		   genetico.mutacao(mapa, genetico.populacaoInicial.get(0));
+		        		   genetico.buscaLocal(mapa);
 		        		   i=0;
 		        	   }
 		           }
-		       }  
-		    }
+		       } 
+		       System.out.println("distância Mínima = "+genetico.populacaoInicial.get(0).getDistanciaTotal()+" Pontos = "+genetico.populacaoInicial.get(0).getPontos());
+		    //}
 	    	bw.flush();
 	    	bw.close();
     	}catch(IOException ex){

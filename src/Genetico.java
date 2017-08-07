@@ -23,7 +23,7 @@ public class Genetico {
 	   int i;
 	   tamanhoMediana =mapa.getMedianas();
 	   populacaoInicial = new ArrayList<>();	
-       for (i=0;i<100;i++){
+       for (i=0;i<1000;i++){
            Individuo individuo = new Individuo();
            individuo.solucaoAleatoria(mapa);
            individuo.calculaDistTotal(mapa);
@@ -114,5 +114,40 @@ public class Genetico {
         individuo.medianas.add(mapa.vertices.get(j));
 		return individuo;
         
+	}
+	public void buscaLocal(Mapa mapa){
+		Individuo individuo = populacaoInicial.get(0);
+		Random rand = new Random();
+		int j  = rand.nextInt(mapa.getTamanho()-1);
+		float pontosAntiga = individuo.getPontos();
+		Vertices verticeZero = individuo.medianas.get(0);
+		int i=0;
+		for (i=0; i<individuo.medianas.size()-1;i++){
+			while (individuo.medianas.contains(mapa.vertices.get(j))){
+				j = rand.nextInt(mapa.getTamanho()-1);
+			}
+			individuo.medianas.remove(0);  
+			individuo.medianas.add(mapa.vertices.get(j)); 
+			individuo.limparCapacidade();
+			individuo.calculaDistTotal(mapa);
+			if (individuo.getPontos()<pontosAntiga){
+				System.out.println("Melhor "+individuo.getPontos());
+				break;
+			} else{
+				individuo.medianas.remove(0);
+				individuo.medianas.add(verticeZero);
+				individuo.limparCapacidade();
+				individuo.calculaDistTotal(mapa);
+			}
+
+		}
+		if (individuo.getPontos()>pontosAntiga){
+			individuo.medianas.remove(0);
+			individuo.medianas.add(verticeZero);
+			individuo.limparCapacidade();
+			individuo.calculaDistTotal(mapa);
+		}
+		populacaoInicial.add(individuo);
+		Collections.sort(populacaoInicial, idComparator);
 	}
 }
